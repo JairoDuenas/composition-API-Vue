@@ -6,17 +6,21 @@
 </template>
 
 <script>
-import { ref, computed, reactive, watch } from "vue";
+import { toRefs, ref, computed, reactive, watch } from "vue";
 
 export default {
-  setup() {
+  props: {
+    firstName: String,
+    lastName: String,
+  },
+
+  setup(props) {
     const text = ref("Hola Vue");
     const obj = reactive({ counter: 0 });
 
     setInterval(() => obj.counter++, 1000);
 
-    const firstName = ref("Jairo");
-    const lastName = ref("Dueñas");
+    const { firstName, lastName } = toRefs(props);
 
     const fullName = computed(() => {
       return `${firstName.value} ${lastName.value}`;

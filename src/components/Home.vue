@@ -14,7 +14,7 @@ export default {
     lastName: String,
   },
 
-  setup(props) {
+  setup(props, { expose }) {
     const text = ref("Hola Vue");
     const obj = reactive({ counter: 0 });
 
@@ -24,6 +24,10 @@ export default {
 
     const fullName = computed(() => {
       return `${firstName.value} ${lastName.value}`;
+    });
+
+    expose({
+      fullName,
     });
 
     watch(

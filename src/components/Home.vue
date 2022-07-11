@@ -1,16 +1,22 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div>Hola</div>
+  <div>{{ text }}</div>
+  <div>{{ obj }}</div>
 </template>
 
 <script>
-import { onMounted } from "vue";
+import { ref, reactive } from "vue";
 
 export default {
   setup() {
-    onMounted(() => {
-      console.log("mounted");
-    });
+    const text = ref("Hola Vue");
+    const obj = reactive({ counter: 0 });
+
+    setInterval(() => obj.counter++, 700);
+    return {
+      text,
+      obj,
+    };
   },
 };
 </script>

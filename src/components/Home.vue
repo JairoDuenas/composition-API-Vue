@@ -3,10 +3,11 @@
   <div>{{ text }}</div>
   <div>{{ obj.counter }}</div>
   <div>FullName: {{ fullName }}</div>
+  <div>{{ username }}</div>
 </template>
 
 <script>
-import { toRefs, ref, computed, reactive, watch } from "vue";
+import { toRefs, ref, computed, reactive, watch, inject } from "vue";
 
 export default {
   props: {
@@ -26,6 +27,8 @@ export default {
       return `${firstName.value} ${lastName.value}`;
     });
 
+    const username = inject("username");
+
     expose({
       fullName,
     });
@@ -40,6 +43,7 @@ export default {
       text,
       obj,
       fullName,
+      username,
     };
   },
 };

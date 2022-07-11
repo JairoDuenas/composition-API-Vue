@@ -7,47 +7,44 @@
   <button ref="btn">Click!</button>
 </template>
 
-<script>
-import { toRefs, ref, computed, reactive, watch, inject } from "vue";
+<script setup>
+import {
+  defineProps,
+  defineExpose,
+  toRefs,
+  ref,
+  computed,
+  reactive,
+  watch,
+  inject,
+} from "vue";
 
-export default {
-  props: {
-    firstName: String,
-    lastName: String,
-  },
+const props = defineProps({
+  firstName: String,
+  lastName: String,
+});
 
-  setup(props, { expose }) {
-    const text = ref("Hola Vue");
-    const obj = reactive({ counter: 0 });
+const text = ref("Hola Vue");
+const obj = reactive({ counter: 0 });
 
-    setInterval(() => obj.counter++, 1000);
+setInterval(() => obj.counter++, 1000);
 
-    const { firstName, lastName } = toRefs(props);
+const { firstName, lastName } = toRefs(props);
 
-    const fullName = computed(() => {
-      return `${firstName.value} ${lastName.value}`;
-    });
+const fullName = computed(() => {
+  return `${firstName.value} ${lastName.value}`;
+});
 
-    const username = inject("username");
+const username = inject("username");
 
-    expose({
-      fullName,
-    });
+defineExpose({
+  fullName,
+});
 
-    const btn = ref(null);
-    console.log(btn.value);
+const btn = ref(null);
+console.log(btn.value);
 
-    watch(btn, (valor) => {
-      console.log(valor);
-    });
-
-    return {
-      text,
-      obj,
-      fullName,
-      username,
-      btn,
-    };
-  },
-};
+watch(btn, (valor) => {
+  console.log(valor);
+});
 </script>

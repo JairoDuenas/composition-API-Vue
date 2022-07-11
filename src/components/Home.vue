@@ -4,6 +4,7 @@
   <div>{{ obj.counter }}</div>
   <div>FullName: {{ fullName }}</div>
   <div>{{ username }}</div>
+  <button ref="btn">Click!</button>
 </template>
 
 <script>
@@ -33,17 +34,19 @@ export default {
       fullName,
     });
 
-    watch(
-      () => obj.counter,
-      (valor, anterior) => {
-        console.log(valor, anterior);
-      }
-    );
+    const btn = ref(null);
+    console.log(btn.value);
+
+    watch(btn, (valor) => {
+      console.log(valor);
+    });
+
     return {
       text,
       obj,
       fullName,
       username,
+      btn,
     };
   },
 };
